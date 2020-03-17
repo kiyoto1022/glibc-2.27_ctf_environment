@@ -1,5 +1,8 @@
 name: Store Docker Image
-on: [push]
+on:
+  push:
+    paths:
+    - 'Dockerfile'
 jobs:
   store:
     name: 
