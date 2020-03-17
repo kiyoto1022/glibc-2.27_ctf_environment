@@ -1,0 +1,16 @@
+name: Store Docker Image
+on: [push]
+jobs:
+  store:
+    name: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login GitHub Registry
+        run: docker login docker.pkg.github.com -u kiyoto1022 -p ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Image
+        run: docker build -t ctf .
+      - name: Create Tag 
+        run: docker tag ctf:latest docker.pkg.github.com/kiyoto1022/glibc-2.27_ctf_environment/ctf:latest
+      - name: Publish
+        run: docker push docker.pkg.github.com/kiyoto1022/glibc-2.27_ctf_environment/ctf:latest
